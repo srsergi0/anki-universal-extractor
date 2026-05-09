@@ -55,7 +55,17 @@ bun install
 
 ## 🛠️ Usage
 
-Convert any `.apkg` file to JSON and a media folder in seconds:
+You can run the extractor directly without installing it using `bun x`, or run it locally after installation.
+
+### ⚡ Option 1: Run with `bun x` (Easiest)
+Convert any `.apkg` file to JSON and a media folder instantly:
+
+```bash
+bun x github:srsergi0/anki-universal-extractor ./path/to/your/deck.apkg
+```
+
+### 💻 Option 2: Local Execution
+If you have cloned the repo and run `bun install`:
 
 ```bash
 bun run anki-extract.ts ./path/to/your/deck.apkg

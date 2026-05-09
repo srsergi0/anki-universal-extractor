@@ -1,4 +1,5 @@
 
+#!/usr/bin/env bun
 import { Database } from "bun:sqlite";
 import AdmZip from "adm-zip";
 import fs from "fs";
