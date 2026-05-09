@@ -1,56 +1,79 @@
 # 🎴 Anki Universal Extractor
 
-> A high-performance, universal utility to liberate your flashcards from Anki's database into clean, actionable JSON and media assets.
+> **High-performance Anki (.apkg) deck extractor.** Liberate your flashcards from Anki's database into clean, actionable JSON and media assets.
 
-![Bun](https://img.shields.io/badge/Bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white)
-![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
-![SQLite](https://img.shields.io/badge/sqlite-%2307405e.svg?style=for-the-badge&logo=sqlite&logoColor=white)
+[![Bun](https://img.shields.io/badge/Bun-%23000000.svg?style=for-the-badge&logo=bun&logoColor=white)](https://bun.sh/)
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## ✨ Overview
+Anki Universal Extractor is a robust, script-based solution built with **Bun** and **TypeScript** to process `.apkg` files. It automates the extraction of notes (converted to JSON) and associated media files (audio/images) from any Anki deck, bypassing database locking issues and template complexities.
 
-This tool is designed to bypass the complexity of Anki's internal database structure. It provides a robust, script-based solution to process `.apkg` files, extracting all notes and their associated media files (audio, images) automatically.
+---
 
-Built specifically to handle the "deceptively simple" task of data extraction, it ensures:
-- **Zero Database Locking**: Safely handles file extraction on Windows systems.
-- **Universal Field Mapping**: Automatically detects and maps dynamic field names from any Anki template.
-- **Media Integrity**: Preserves and organizes all media files with their original filenames.
+## 📖 Table of Contents
+- [✨ Key Features](#-key-features)
+- [❓ Why Anki Universal Extractor?](#-why-anki-universal-extractor)
+- [🚀 Quick Start](#-quick-start)
+- [🛠️ Usage](#-usage)
+- [📂 Project Structure](#-project-structure)
+- [📝 Data Format](#-data-format)
+- [🤝 Contributing](#-contributing)
 
-## 🚀 Getting Started
+---
+
+## ✨ Key Features
+
+- **⚡ Blazing Fast**: Leverages Bun's native SQLite module for near-instant extraction.
+- **🔄 Universal Field Mapping**: Automatically detects and maps dynamic field names from any Anki template (No hardcoded field names).
+- **📦 Media Integrity**: Extracts and organizes images, audio, and videos with their original filenames.
+- **🛡️ Windows Friendly**: Handles database locking gracefully to prevent extraction errors on Windows systems.
+- **📄 Clean JSON Output**: Generates a standard JSON structure ready for web apps, print tools, or AI processing.
+
+## ❓ Why Anki Universal Extractor?
+
+Extracting data from Anki can be "deceptively simple" until you encounter:
+1. **Database Locks**: Accessing `collection.anki2` while Anki is open or through standard tools often fails.
+2. **Complex Schemas**: Different decks use different field names (e.g., "Hanzi" vs "Front"). This tool maps them dynamically based on the deck's metadata.
+3. **Media Mapping**: Anki stores media filenames numerically in a JSON map; this tool restores their human-readable names automatically.
+
+## 🚀 Quick Start
 
 ### Prerequisites
-
-You must have [Bun](https://bun.sh/) installed.
+- [Bun Runtime](https://bun.sh/) (Required for SQLite performance and TS execution)
 
 ### Installation
-
-Clone the repository and install dependencies:
-
 ```bash
+# Clone the repository
+git clone https://github.com/srsergi0/anki-universal-extractor.git
+
+# Enter the directory
+cd anki-universal-extractor
+
+# Install dependencies
 bun install
 ```
 
 ## 🛠️ Usage
 
-To extract an Anki deck, simply run the extractor script pointing to your `.apkg` file:
+Convert any `.apkg` file to JSON and a media folder in seconds:
 
 ```bash
-bun run anki-extract.ts ./data/your-deck.apkg
+bun run anki-extract.ts ./path/to/your/deck.apkg
 ```
 
-### What happens next?
-1. **Extraction**: The script unzips the `.apkg` and accesses the SQLite collection.
-2. **JSON Output**: A `.json` file is generated in the same directory containing all notes with their field names and tags.
-3. **Media Assets**: A folder named `*_media` is created containing all images and audio files used in the deck.
+### Output Result:
+- `deck.json`: A complete database of your cards.
+- `deck_media/`: A folder containing all associated media files.
 
 ## 📂 Project Structure
 
-- `anki-extract.ts`: The core extraction engine using `bun:sqlite`.
-- `data/`: Recommended directory for your `.apkg` files and extracted output.
-- `package.json`: Project configuration and dependencies (AdmZip for package handling).
+- `anki-extract.ts`: The main extraction engine.
+- `data/`: (Recommended) Place your source `.apkg` files here.
+- `package.json`: Configuration and dependencies.
 
-## 📝 Output Format
+## 📝 Data Format
 
-The generated JSON follows a flat, easy-to-parse structure:
+The output JSON provides a flat, developer-friendly structure:
 
 ```json
 [
@@ -64,6 +87,16 @@ The generated JSON follows a flat, easy-to-parse structure:
 ]
 ```
 
+## 🤝 Contributing
+
+Contributions are welcome! Whether it's fixing bugs, adding features, or improving documentation, feel free to open a Pull Request.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
 ## ⚖️ License
 
-MIT
+Distributed under the MIT License. See `LICENSE` for more information.
